@@ -67,24 +67,34 @@
 
     .card {
       aspect-ratio: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      padding: 0;
+      line-height: 1;
       border: none;
       border-radius: 12px;
       font-size: clamp(1.8rem, 8vw, 2.6rem);
       cursor: pointer;
       background: var(--card-back);
       box-shadow: var(--shadow);
-      transition: transform 0.25s, background 0.2s;
+      transition: background 0.2s;
       color: transparent;
     }
     .card:hover:not(.open):not(.matched) { background: var(--card-back-hover); }
     .card.open,
     .card.matched {
       background: var(--card-front);
-      color: inherit;
-      transform: rotateY(180deg) scaleX(-1);
+      color: var(--text);
       cursor: default;
     }
+    /* Flache Umdreh-Animation: 3D-Drehungen blenden auf iPhones den Inhalt aus */
+    .card.open { animation: flip 0.25s ease-out; }
     .card.matched { background: var(--matched); }
+
+    @keyframes flip {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
 
     button.restart {
       margin-top: 20px;
